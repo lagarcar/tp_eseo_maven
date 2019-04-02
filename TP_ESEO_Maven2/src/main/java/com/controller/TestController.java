@@ -11,14 +11,13 @@ import com.dao.Requetes;
 public class TestController {
 	
 	public Requetes requetes;
-	
 	@RequestMapping (value="/test",method=RequestMethod.GET )
 	@ResponseBody
 	public String get(@RequestParam(required = false, value="value") String value) {
-		//this.requetes = new Requetes();
-		//this.requetes.getVilles(value);
-		System.out.println("appel get");
-		System.out.println("value: "+value);
-		return value;
+		this.requetes = new Requetes();
+		return this.requetes.getVilles(value);
+		//System.out.println("appel get");
+		//System.out.println("value: "+value);
+		//return value;
 	}
 }
