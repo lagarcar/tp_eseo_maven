@@ -78,10 +78,11 @@ public class Requetes {
 		return res;
 	}
 	
-	public ArrayList<Ville> getAllVillesObject() {
+	public Ville[] getAllVillesObject() {
 		this.co = new Connexion();
 		this.co.connexionBDD();
-		ArrayList<Ville> villes = new ArrayList<Ville>();
+		Ville[] villes = new Ville[3352];
+		int i =0;
 		Statement stmt;
 		try {
 			stmt = this.co.getCo().createStatement();
@@ -93,7 +94,8 @@ public class Requetes {
 			while (rs.next()) {
 			Ville ville = new Ville(rs.getString(1),rs.getString(2), rs.getString(3),rs.getString(4),
 						rs.getString(5),rs.getString(6), rs.getString(7));
-			villes.add(ville);
+			villes[i] = ville;
+			i++;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,10 +128,10 @@ public void putVilles(String codeCommune, String nomCommune, String codePostal, 
 		this.co.connexionBDD();
 		PreparedStatement stmt;
 
-		String requete = "UPDATE ville_france SET Code_commune_INSEE = ?, Nom_commune=?, Code_postal=?, Libelle_acheminement=?, Ligne_5=?, Latitude=?, Longitude=?";
+		String requete = "UPDATE ville_france SET Nom_commune=?, Code_postal=?, Libelle_acheminement=?, Ligne_5=?, Latitude=?, Longitude=? where Code_commune_INSEE ="+codeCommune;
 		
 		try {
-			stmt = this.co.getCo().prepareStatement(initialisationRequetePreparee(requete,codeCommune,nomCommune,codePostal,libelle,ligne5,latitude,longitude));
+			stmt = this.co.getCo().prepareStatement(initialisationRequetePreparee(requete,nomCommune,codePostal,libelle,ligne5,latitude,longitude));
 			stmt.executeUpdate();
 			System.out.println("update effectuée");
 		} catch (SQLException e) {

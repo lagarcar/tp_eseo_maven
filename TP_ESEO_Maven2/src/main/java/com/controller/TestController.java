@@ -16,22 +16,10 @@ public class TestController {
 	public Requetes requetes;
 	@RequestMapping (value="/test",method=RequestMethod.GET )
 	@ResponseBody
-	public ArrayList<Ville> get(@RequestParam(required = false, value="value") String value) {
+	public Ville[] get(@RequestParam(required = false, value="value") String value) {
 		
 		this.requetes = new Requetes();
 		return this.requetes.getAllVillesObject();
 
-//		if (value.equals("all")) {
-//			//return this.requetes.getAllVilles();
-//		}else if (value.equals("nom")) {
-//			return this.requetes.TriNom();
-//		}else if (value.equals("codepostal")) {
-//			return this.requetes.TriCode();
-//		}else {
-//		return this.requetes.getVilles(value);
-//		}
-//		//System.out.println("appel get");
-//		//System.out.println("value: "+value);
-//		//return value;
 	}
 }

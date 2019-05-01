@@ -20,6 +20,9 @@ public class Ville {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+	public Ville() {
+		
+	}
 
 	public String getCode_communne_insee() {
 		return code_communne_insee;
